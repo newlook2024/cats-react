@@ -21,7 +21,7 @@ export default function Swipper() {
           </h2>
 
           <Swiper
-            className="lg:pb-8 md:pb-[70px]"
+            className="!lg:pb-8 !md:pb-[70px]"
             modules={[Pagination]}
             spaceBetween={50}
             pagination={{ clickable: true }}

@@ -13,7 +13,7 @@ export default function Swipper1() {
             Отзывы
           </h2>
           <Swiper
-            className="lg:pb-14 md:pb-[70px] pb-[90px]"
+            className="!lg:pb-14 !md:pb-[70px] !pb-[90px]"
             modules={[Pagination]}
             spaceBetween={50}
             pagination={{ clickable: true }}
