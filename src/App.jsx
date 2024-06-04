@@ -2,6 +2,8 @@
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Map from "./components/Map";
+import Swipper from "./components/Swipper";
+import Swipper1 from "./components/Swipper1";
 // COMPONENTS
 
 // DATA
@@ -16,8 +18,6 @@ import car from "./img/home/we/car.svg";
 import fish from "./img/home/we/fishFood.svg";
 import cat from "./img/home/we/cat.svg";
 import hand from "./img/home/we/hand.svg";
-import Swipper from "./components/Swipper";
-import Swipper1 from "./components/Swipper1";
 // IMAGES
 
 export default function App() {
