@@ -1,5 +1,6 @@
 import { useState } from "react";
 import headerLogo from "../img/header/headerLogo.svg";
+import {Link} from "react-router-dom"
 
 export default function Header() {
   let [isOpen, setIsOpen] = useState(false);
@@ -14,9 +15,9 @@ export default function Header() {
     <>
       <header className="md:pt-3 py-3 m:pb-7 bg-white">
         <div className="max-w-[1192px] px-4 mx-auto flex items-center justify-between">
-          <a href="./index.html" className="md:w-[62px] w-[] md:h-[52px] flex">
+          <Link to="/" className="md:w-[62px] w-[] md:h-[52px] flex">
             <img src={headerLogo} alt="header logo" />
-          </a>
+          </Link>
           <button
             onClick={menuOpen}
             id="burger"
@@ -40,20 +41,18 @@ export default function Header() {
           </button>
           <ul className="md:flex hidden justify-end gap-5">
             <li>
-              <a
-                href="#"
+              <Link to="About" 
                 className="leading-4 font-semibold text-[16px] text-black1"
               >
                 Почему мы?
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="./number.html"
+              <Link to="Number"
                 className="leading-4 font-semibold text-[16px] text-black1"
               >
                 Номера
-              </a>
+              </Link>
             </li>
             <li>
               <a
