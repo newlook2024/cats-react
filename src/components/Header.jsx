@@ -48,19 +48,18 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <Link to="Number"
+              <Link to="Last"
                 className="leading-4 font-semibold text-[16px] text-black1"
               >
                 Номера
               </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link to="Last"
                 className="leading-4 font-semibold text-[16px] text-black1"
               >
                 Отзывы
-              </a>
+              </Link>
             </li>
             <li>
               <a
