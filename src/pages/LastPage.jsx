@@ -5,6 +5,7 @@ import SleepingCat from "../img/number/sleepingCat.png";
 import MainCat from "../img/katalog/6.png";
 import paw from "../img/home/number/paw.svg"
 import Swipper from "../components/Swipper";
+import Map from "../components/Map";
 
 export default function LastPage() {
   const [ChangeImg, setChangeImg] = useState();
@@ -147,6 +148,7 @@ export default function LastPage() {
         </div>
       </section>
       <Swipper/>
+      <Map/>
     </>
   );
 }
