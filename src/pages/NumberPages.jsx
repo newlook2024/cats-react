@@ -3,12 +3,10 @@ import Map from "../components/Map";
 import data from "../data/katalogData";
 import paw from "../img/home/number/paw.svg";
 
-//
-
 export default function NumberPages() {
   let [visible, setVisible] = useState(false);
-  function filterIsOpen () {
-    setVisible(!visible)
+  function filterIsOpen() {
+    setVisible(!visible);
   }
   const [checkboxData, setcheckboxData] = useState([
     {
@@ -103,7 +101,8 @@ export default function NumberPages() {
               Наши номера
             </h1>
             <div className="flex md:justify-end justify-between gap-7">
-              <button onClick={filterIsOpen}
+              <button
+                onClick={filterIsOpen}
                 id="filterBtn"
                 className="flex items-center lg:translate-y-2 justify-between py-3 px-5 lg:hidden bg-white rounded-3xl"
                 style={{ boxShadow: "0px 2px 12px 0px #ad988f2e" }}
@@ -256,7 +255,7 @@ export default function NumberPages() {
                     key={element.id}
                     className="border-2 border-[#e1e1e1] rounded-md overflow-hidden"
                   >
-                    <img src={element.img} alt="img" />
+                    <img className="w-full" src={element.img} alt="img" />
                     <div className="px-5 py-6">
                       <h4 className="text-xl leading-6 text-black1 font-medium mb-5">
                         {element.catigory}
@@ -305,16 +304,19 @@ export default function NumberPages() {
       <Map />
 
       <div>
-        <div className={`blur lg:hidden ${!visible ? "hidden" : 'flex'}`} />
+        <div className={`blur lg:hidden ${!visible ? "hidden" : "flex"}`} />
         <div
           id="modaFilter"
-          className={`absolute top-0 lg:hidden ${!visible ? "hidden" : "flex"} left-0 px-4 w-full pt-[136px]`}
+          className={`absolute top-0 lg:hidden ${
+            !visible ? "hidden" : "flex"
+          } left-0 px-4 w-full pt-[136px]`}
         >
           <div
             style={{ boxShadow: "0px 4px 25px 0px #99999940" }}
             className="mx-auto w-full max-w-[280px] bg-white relative pt-5 px-5 rounded-md flex flex-col min-h-[825px]"
           >
-            <div onClick={filterIsOpen}
+            <div
+              onClick={filterIsOpen}
               id="filterClose"
               className="w-[14px] h-[14px] flex items-center ml-auto cursor-pointer mb-6 justify-center"
             >
@@ -391,7 +393,11 @@ export default function NumberPages() {
                 </h3>
                 {equipmentData.map((data) => {
                   return (
-                    <li key={data.id} onClick={() => equipmentIschecked(data.id)} className="flex checkInput items-center gap-2.5 justify-start">
+                    <li
+                      key={data.id}
+                      onClick={() => equipmentIschecked(data.id)}
+                      className="flex checkInput items-center gap-2.5 justify-start"
+                    >
                       <div
                         id="checkbox"
                         className="w-5 h-5 flex cursor-pointer items-center border-2 border-[#e1e1e1] justify-center"

@@ -7,12 +7,6 @@ import { Fragment } from "react";
 import cardsInfo from "../data/cardsInfo"
 
 import paw from "../img/home/hero/paw.svg";
-import temperatura from "../img/home/we/temperature.svg";
-import camera from "../img/home/we/camera.svg";
-import car from "../img/home/we/car.svg";
-import fish from "../img/home/we/fishFood.svg";
-import cat from "../img/home/we/cat.svg";
-import hand from "../img/home/we/hand.svg";
 
 export default function Homepages() {
   return (

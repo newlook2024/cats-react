@@ -77,9 +77,9 @@ export default function Header() {
             } duration-300 md:hidden block`}
           >
             <div className="flex w-full items-center mb-12 justify-between">
-              <a href="./index.html" className="w-11 h-9 flex">
+              <Link to="/" className="w-11 h-9 flex">
                 <img src={headerLogo} alt="header logo" />
-              </a>
+              </Link>
               <button
                 id="close" onClick={closeMenu}
                 className="w-3 h-3 flex items-center hover:bg-transparent justify-between"
@@ -101,20 +101,19 @@ export default function Header() {
             </div>
             <ul className="flex flex-col gap-6 mb-10">
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/About"
                   className="leading-4 font-semibold text-xl text-black1"
                 >
                   Почему мы?
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="./number.html"
+                <Link to="Last"
                   className="leading-4 font-semibold text-xl text-black1"
                 >
                   Номера
-                </a>
+                </Link>
               </li>
               <li>
                 <a

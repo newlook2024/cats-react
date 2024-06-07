@@ -133,9 +133,9 @@ export default function Map() {
             />
           </div>
         </div>
-        <div className="overflow-hidden">
+        <div className="overflow-hidden grid">
           <iframe
-            className="max-w-[375px] flex md:hidden"
+            className="w-full flex md:hidden"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48343.85321256757!2d72.34846719999999!3d40.7732224!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38bcedfa17cb202d%3A0x39d877e9d6ddc048!2sTexnomart!5e0!3m2!1suz!2s!4v1717151834006!5m2!1suz!2s"
             width={400}
             height={300}
