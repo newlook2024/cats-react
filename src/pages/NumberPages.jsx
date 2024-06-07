@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Map from "../components/Map";
 import data from "../data/katalogData";
 import paw from "../img/home/number/paw.svg";
+import { checkData, checkData2 } from "../data/checkboxData";
 
 export default function NumberPages() {
-  let [visible, setVisible] = useState(false);
-  function filterIsOpen() {
-    setVisible(!visible);
-  }
+  const [visible, setVisible] = useState(false);
+  const [cardData, setCardData] = useState(data);
+  // const [filteredData, setFilteredData] = useState([]);
+  const [prevData, setPrevData] = useState([]);
+
   const [checkboxData, setcheckboxData] = useState([
     {
       title: "0,90 м2",
@@ -15,12 +17,12 @@ export default function NumberPages() {
       isCheacked: false,
     },
     {
-      title: " 0,63 м2",
+      title: "0,63 м2",
       id: 2,
       isCheacked: false,
     },
     {
-      title: " 1,13 м2",
+      title: "1,13 м2",
       id: 3,
       isCheacked: false,
     },
@@ -69,32 +71,121 @@ export default function NumberPages() {
     },
   ]);
 
+  function filterIsOpen() {
+    setVisible(!visible);
+  }
+
   function checkboxDataIschecked(info) {
     setcheckboxData((prewData) =>
       prewData.map((item) => {
-        if (item.id === info) {
+        if (item.id === info.id) {
           return { ...item, isCheacked: !item.isCheacked };
         }
         return item;
       })
     );
+
+    if (!info.isCheacked) {
+      filterData(info);
+    } else {
+      deleteFilterData(info);
+    }
   }
+
+  const filterData = useCallback(
+    (info) => {
+      const filteredData = data.filter(
+        (dataItem) => info.title === dataItem.square_for_filter
+      );
+
+      setPrevData((prev) => {
+        const newData = [...prev, ...filteredData];
+        setCardData(newData.length ? newData : filteredData);
+        console.log(newData);
+        return newData;
+      });
+    },
+    [data]
+  );
+
+  const deleteFilterData = useCallback(
+    (info) => {
+      const filteredData = prevData.filter(
+        (dataItem) =>
+          info.title.toLowerCase() !== dataItem.square_for_filter.toLowerCase()
+      );
+      setPrevData(filteredData);
+      setCardData(filteredData);
+    },
+    [prevData]
+  );
 
   function equipmentIschecked(info) {
     setEquipmentData((prevData) =>
       prevData.map((item) => {
         // Highlighted: Added 'return' keyword
-        if (item.id === info) {
+        if (item.id === info.id) {
           return { ...item, isCheacked: !item.isCheacked };
         }
         return item;
       })
     );
+
+    if (!info.isCheacked) {
+      equipmentFilterData(info);
+    } else {
+      equipmentDeleteFilterData(info);
+    }
   }
+
+  const equipmentFilterData = useCallback(
+    (info) => {
+      const filteredData = data.filter(
+        (dataItem) => info.title === dataItem.number
+      );
+
+      setPrevData((prev) => {
+        const newData = [...prev, ...filteredData];
+        setCardData(newData.length ? newData : filteredData);
+        console.log(newData);
+        return newData;
+      });
+    },
+    [data]
+  );
+
+  const equipmentDeleteFilterData = useCallback(
+    (info) => {
+      const filteredData = prevData.filter(
+        (dataItem) => info.title.toLowerCase() !== dataItem.number.toLowerCase()
+      );
+      setPrevData(filteredData);
+      setCardData(filteredData);
+    },
+    [prevData]
+  );
+
+  function unChecked() {
+    setcheckboxData(null);
+    setcheckboxData(checkData);
+    setEquipmentData(null)
+    setEquipmentData(checkData2)
+    setPrevData([])
+    setCardData(null)
+    setCardData(data)
+  }
+
+  useEffect(() => {
+    if (cardData.length == 0) {
+      setCardData(data);
+    }
+  }, [cardData]);
 
   return (
     <>
-      <section className="bg-white pt-7 md:pt-10 pb-[659px]">
+      <section
+        className="bg-white pt-7 md:pt-10 pb-[659px]"
+      >
         <div className="max-w-[1192px] px-4 mx-auto">
           <div className="flex md:flex-row flex-col md:items-center justify-between mb-7 md:mb-[60px]">
             <h1 className="text-black1 font-bold text-3xl leading-8 md:text-4xl mb-10 md:mb-0">
@@ -171,7 +262,7 @@ export default function NumberPages() {
                     <li
                       className="flex checkInput items-center gap-2.5 justify-start"
                       key={data.id}
-                      onClick={() => checkboxDataIschecked(data.id)}
+                      onClick={() => checkboxDataIschecked(data)}
                     >
                       <div
                         id="checkbox"
@@ -210,7 +301,7 @@ export default function NumberPages() {
                   return (
                     <li
                       key={data.id}
-                      onClick={() => equipmentIschecked(data.id)}
+                      onClick={() => equipmentIschecked(data)}
                       className="flex checkInput items-center gap-2.5 justify-start"
                     >
                       <div
@@ -241,7 +332,7 @@ export default function NumberPages() {
                   );
                 })}
               </ul>
-              <button className="border-2 text-[14px] leading-[10px] text-black1 font-semibold border-[#FAC663] px-9 py-4 rounded-3xl flex">
+              <button  onClick={unChecked} className="border-2 text-[14px] leading-[10px] text-black1 font-semibold border-[#FAC663] px-9 py-4 rounded-3xl flex">
                 Сбросить фильтр
               </button>
             </div>
@@ -249,7 +340,7 @@ export default function NumberPages() {
               id="cardBox"
               className="grid lg:grid-cols-3 md:grid-cols-2 w-full gap-7"
             >
-              {data.map((element) => {
+              {cardData.map((element) => {
                 return (
                   <div
                     key={element.id}
@@ -356,7 +447,7 @@ export default function NumberPages() {
                   return (
                     <li
                       key={data.id}
-                      onClick={() => checkboxDataIschecked(data.id)}
+                      onClick={() => checkboxDataIschecked(data)}
                       className="flex checkInput items-center gap-2.5 justify-start"
                     >
                       <div
@@ -395,7 +486,7 @@ export default function NumberPages() {
                   return (
                     <li
                       key={data.id}
-                      onClick={() => equipmentIschecked(data.id)}
+                      onClick={() => equipmentIschecked(data)}
                       className="flex checkInput items-center gap-2.5 justify-start"
                     >
                       <div
@@ -429,7 +520,7 @@ export default function NumberPages() {
               <button className="border-2 w-full text-[14px] justify-center mb-4 leading-[10px] text-black1 font-semibold bg-orange border-[#FAC663] px-9 py-4 rounded-3xl flex">
                 Подобрать
               </button>
-              <button className="border-2 w-full justify-center text-[14px] leading-[10px] text-black1 font-semibold border-[#FAC663] px-9 py-4 rounded-3xl flex">
+              <button onClick={unChecked} className="border-2 w-full justify-center text-[14px] leading-[10px] text-black1 font-semibold border-[#FAC663] px-9 py-4 rounded-3xl flex">
                 Сбросить фильтр
               </button>
             </div>
