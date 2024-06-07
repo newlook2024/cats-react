@@ -3,12 +3,20 @@ import Cat from "../img/number/cat.png";
 import StandingCat from "../img/number/standingCat.png";
 import SleepingCat from "../img/number/sleepingCat.png";
 import MainCat from "../img/katalog/6.png";
-import paw from "../img/home/number/paw.svg"
+import paw from "../img/home/number/paw.svg";
 import Swipper from "../components/Swipper";
 import Map from "../components/Map";
+import { data } from "autoprefixer";
 
 export default function LastPage() {
-  const [ChangeImg, setChangeImg] = useState();
+  const [ChangeUrl, setChangeUrl] = useState(MainCat);
+
+  function ImgUrlChange(url) {
+    setChangeUrl(url);
+    console.log(ChangeUrl);
+  }
+
+  let imgUrls = [Cat, StandingCat, SleepingCat];
 
   return (
     <>
@@ -17,28 +25,22 @@ export default function LastPage() {
           <div className="flex md:block items-center justify-center w-full md:max-w-[354px] lg:max-w-[600px]">
             <div className="flex items-cente lg:flex-row flex-col-reverse md:items-start md:justify-start gap-7">
               <div className="flex flex-row lg:flex-col gap-5 lg:gap-7">
-                <img
-                  id="changeImg"
-                  className="lg:max-w-[70px] w-[104px] object-cover rounded max-h-[78px] flex lg:min-h-[112px] lg:w-full"
-                  src={Cat}
-                  alt="cat"
-                />
-                <img
-                  id="changeImg"
-                  className="lg:max-w-[70px] w-[104px] object-cover rounded max-h-[78px] flex lg:min-h-[112px] lg:w-full"
-                  src={StandingCat}
-                  alt="cat"
-                />
-                <img
-                  id="changeImg"
-                  className="lg:max-w-[70px] w-[104px] object-cover rounded max-h-[78px] flex lg:min-h-[112px] lg:w-full"
-                  src={SleepingCat}
-                  alt="cat"
-                />
+                {imgUrls.map((ImgUrlData, index) => {
+                  return (
+                    <img
+                      key={index}
+                      onClick={() => ImgUrlChange(ImgUrlData)}
+                      id="changeImg"
+                      className="lg:max-w-[70px] w-[104px] object-cover rounded max-h-[78px] flex lg:min-h-[112px] lg:w-full"
+                      src={ImgUrlData}
+                      alt="cat"
+                    />
+                  );
+                })}
               </div>
               <img
                 id="mainImg"
-                src={MainCat}
+                src={ChangeUrl}
                 alt="big cat png"
                 className="lg:max-w-[500px] lg:min-w-[500px] max-w-full object-cover rounded md:max-w-[354px] w-full min-h-[288px] max-h-[288px] lg:min-h-[396px] flex"
               />
@@ -138,17 +140,13 @@ export default function LastPage() {
             </h3>
             <button className="flex pr-2 pl-7 py-2 md:ml-0 leading-4 justify-end items-center gap-5 text-[#FFFDFB] font-semibold bg-[#FF7236] rounded-3xl">
               Забронировать
-              <img
-                className="w-9 h-9 flex"
-                src={paw}
-                alt="paw"
-              />
+              <img className="w-9 h-9 flex" src={paw} alt="paw" />
             </button>
           </div>
         </div>
       </section>
-      <Swipper/>
-      <Map/>
+      <Swipper />
+      <Map />
     </>
   );
 }

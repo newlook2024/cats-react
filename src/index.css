@@ -33,10 +33,10 @@ button:active,
 a:active {
   opacity: 0.6;
 }
-/* 
+
 * {
   user-select: none;
-} */
+}
 
 .swiper-pagination-bullet {
   background: #696666 !important;
